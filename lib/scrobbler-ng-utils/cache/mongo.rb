@@ -32,16 +32,18 @@ module Scrobbler
       # @return [boolean]
       def has?(params={})
         # Check if there is a matching chache entry with no extra parameters
+        found = false
         @collection.find(params).each do |doc|
           if verify(doc, params) then
             @hits += 1
-            return true
+            found = true
+            break
           end
         end
         
         # We have not found a mathing cache entry.
-        @misses += 1
-        false
+        @misses += 1 unless found
+        found
       end
       
       # Store a result into the database.
@@ -51,7 +53,7 @@ module Scrobbler
       # @return [void]
       def set(data, params={})
         if not has?(params) then
-         @collection.insert(params.merge({:xml => data, :timestamp => Time.now.to_i}))
+          @collection.insert(params.merge({:xml => data, :timestamp => Time.now.to_i}))
         end
       end
       
@@ -60,9 +62,14 @@ module Scrobbler
       # @param [Hash] params
       # @return [String]
       def get(params={})
+        found = nil
         @collection.find(params).each do |doc|
-          return doc['xml'] if verify(doc)
+          if verify(doc, params) then
+            found = doc['xml']
+            break
+          end
         end
+        found
       end
       
       # Verify that a specific document matches exactly the request cache.
