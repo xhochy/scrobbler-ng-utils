@@ -16,6 +16,10 @@ tmtags
 ## PROJECT::GENERAL
 coverage
 rdoc
+doc
 pkg
 
 ## PROJECT::SPECIFIC
+.loadpath
+.project
+scrobbler-ng-utils-*.gem
