@@ -24,3 +24,4 @@ pkg
 .project
 scrobbler-ng-utils-*.gem
 .yardoc
+view*.sh
