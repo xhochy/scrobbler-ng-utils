@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Uwe L. Korn"]
-  s.date = %q{2010-08-06}
+  s.date = %q{2010-08-25}
   s.description = %q{Utilities like caching, rate limiting, ... for usage in combination with the scrobbler gem. These will be not included in the main gem as they provide extra functionality that is not always required.}
   s.email = %q{uwelk@xhochy.org}
   s.extra_rdoc_files = [
@@ -27,8 +27,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Utilities for usage in combination with the scrobbler-ng gem}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/scrobbler-ng-utils_spec.rb"
+    "spec/scrobbler-ng-utils_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then

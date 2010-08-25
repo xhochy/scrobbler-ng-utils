@@ -33,8 +33,11 @@ module Scrobbler
       def has?(params={})
         # Check if there is a matching chache entry with no extra parameters
         found = false
-        @collection.find(params).each do |doc|
-          if verify(doc, params) then
+        options = params.merge({})
+        options.delete :api_key
+        options.delete 'api_key'
+        @collection.find(options).each do |doc|
+          if verify(doc, options) then
             @hits += 1
             found = true
             break
@@ -52,8 +55,11 @@ module Scrobbler
       # @param [Hash] params
       # @return [void]
       def set(data, params={})
-        if not has?(params) then
-          @collection.insert(params.merge({:xml => data, :timestamp => Time.now.to_i}))
+        options = params.merge({})
+        options.delete :api_key
+        options.delete 'api_key' 
+        if not has?(options) then
+          @collection.insert(options.merge({:xml => data, :timestamp => Time.now.to_i}))
         end
       end
       
@@ -63,8 +69,11 @@ module Scrobbler
       # @return [String]
       def get(params={})
         found = nil
-        @collection.find(params).each do |doc|
-          if verify(doc, params) then
+        options = params.merge({})
+        options.delete :api_key
+        options.delete 'api_key'
+        @collection.find(options).each do |doc|
+          if verify(doc, options) then
             found = doc['xml']
             break
           end
@@ -80,7 +89,7 @@ module Scrobbler
       def verify(doc, params={}) 
         matches = true
         doc.each do |k,v|
-          next if ['xml', 'timestamp', '_id'].include?(k)
+          next if ['xml', 'timestamp', '_id', 'api_key'].include?(k)
           matches &&= (not (params[k].nil? && params[k.to_sym].nil?))
         end
         matches
