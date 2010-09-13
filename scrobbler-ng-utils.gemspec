@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{scrobbler-ng-utils}
-  s.version = "2.0.4"
+  s.version = "2.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Uwe L. Korn"]
-  s.date = %q{2010-08-25}
+  s.date = %q{2010-09-13}
   s.description = %q{Utilities like caching, rate limiting, ... for usage in combination with the scrobbler gem. These will be not included in the main gem as they provide extra functionality that is not always required.}
   s.email = %q{uwelk@xhochy.org}
   s.extra_rdoc_files = [
